@@ -1,26 +1,13 @@
-class Collection {
-    constructor(title, author){
-        this.title=title;
-        this.author=author;
-    }
-}
 
-let book = [
-    book1={
-        title:"book1",
-        author:"author1"
-    },
-    book2={
-        title:"book2",
-        author:"author2"
-    }
-]
-
+let book = [];
 
 const addBook = () => {
     const bookTitle = document.querySelector('.title');
     const bookAuthor = document.querySelector('.author');
-    const newBook = new Collection(bookTitle.value, bookAuthor.value);
+    const newBook = {};
+    newBook.title = bookTitle.value;
+    newBook.author = bookAuthor.value;
+    
     book.push(newBook);
 
     //display new book
