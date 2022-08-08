@@ -16,43 +16,6 @@ let book = [
     }
 ]
 
-console.log(book);
-
-/* for(let i=0; i < book.length;i++){
-    const display = document.querySelector('.book-display');
-    const div = document.createElement('div');
-    div.className = 'book-list';
-
-    display.appendChild(div);
-
-    const title = document.createElement('p');
-    title.textContent=book[i].title;
-    title.className='class-title';
-
-    div.appendChild(title);
-
-    const author = document.createElement('p');
-    author.textContent=book[i].title;
-    author.className='class-title';
-
-    div.appendChild(author);
-
-    const remove = document.createElement('button');
-    remove.textContent='Remove';
-    remove.className ='remove';
-
-    div.appendChild(remove);
-    
-    remove.addEventListener('click', () => {
-        div.style.display = 'none';
-        for(let i=0; i< book.length; i++){
-            if(book[i].title === title.textContent){
-                book.splice(i,1);
-            }
-        }
-    })
-}
- */
 
 const addBook = () => {
     const bookTitle = document.querySelector('.title');
@@ -62,20 +25,21 @@ const addBook = () => {
 
     //display new book
     if(bookTitle.value && bookAuthor.value){
-        const display = document.querySelector('book-display');
+        const display = document.querySelector('.book-display');
+        console.log(display);
     const div = document.createElement('div');
     div.className = 'book-list';
 
     display.appendChild(div);
 
     const title = document.createElement('p');
-    title.textContent=book[i].title;
+    title.textContent=newBook.title;
     title.className='class-title';
 
     div.appendChild(title);
 
     const author = document.createElement('p');
-    author.textContent=book[i].title;
+    author.textContent=newBook.author;
     author.className='class-title';
 
     div.appendChild(author);
@@ -101,7 +65,7 @@ const addBook = () => {
 
 //add button
 const addButton = document.querySelector('.btn');
-addButton.addEventListener('click', addBook());
+addButton.addEventListener('click', addBook);
 
 /*
 function addToUI(book){
