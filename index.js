@@ -64,7 +64,7 @@ const addBook = () => {
   newBook.title = bookTitle.value;
   newBook.author = bookAuthor.value;
 
-// add book to the array
+  // add book to the array
   book.push(newBook);
 
   // save it to local storage
