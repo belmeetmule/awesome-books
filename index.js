@@ -41,6 +41,8 @@ const displayBook = (book) => {
 
     div.appendChild(author);
 
+    // const bookItem = localStorage.setItem('book', JSON.stringify(book));
+
     const remove = document.createElement('button');
     remove.textContent = 'Remove';
     remove.className = 'remove';
@@ -62,7 +64,7 @@ const addBook = () => {
   newBook.title = bookTitle.value;
   newBook.author = bookAuthor.value;
 
-  // add book to the array
+// add book to the array
   book.push(newBook);
 
   // save it to local storage
