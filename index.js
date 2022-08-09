@@ -1,3 +1,10 @@
+class Books{
+  constructor(title, author){
+    this.title=title;
+    this.author=author;
+  }
+}
+
 const book = [];
 
 // saves array of objects into local store
@@ -58,11 +65,10 @@ const displayBook = (book) => {
 
 // create book object and add it to array and local store
 const addBook = () => {
-  const bookTitle = document.querySelector('.title');
-  const bookAuthor = document.querySelector('.author');
-  const newBook = {};
-  newBook.title = bookTitle.value;
-  newBook.author = bookAuthor.value;
+  const bookTitle = document.querySelector('.title').value;
+  const bookAuthor = document.querySelector('.author').value;
+  const newBook = new Books(bookTitle, bookAuthor);
+  
 
   // add book to the array
   book.push(newBook);
