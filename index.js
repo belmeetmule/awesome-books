@@ -9,11 +9,10 @@ const addBook = () => {
     newBook.author = bookAuthor.value;
     
     book.push(newBook);
-
-    //display new book
+    
     if(bookTitle.value && bookAuthor.value){
-        const display = document.querySelector('.book-display');
-        console.log(display);
+    const display = document.querySelector('.book-display');
+    
     const div = document.createElement('div');
     div.className = 'book-list';
 
@@ -30,6 +29,8 @@ const addBook = () => {
     author.className='class-title';
 
     div.appendChild(author);
+    
+    const bookItem = localStorage.setItem('book', JSON.stringify(book));    
 
     const remove = document.createElement('button');
     remove.textContent='Remove';
@@ -50,26 +51,50 @@ const addBook = () => {
     }
 }
 
+// }
 //add button
 const addButton = document.querySelector('.btn');
 addButton.addEventListener('click', addBook);
 
-/*
-function addToUI(book){
-   
+window.onload = () => {
+    const bookItem = localStorage.getItem('book');
+    if(bookItem){
+        book = JSON.parse(bookItem);
+        book.forEach(book => {
+            const display = document.querySelector('.book-display');
+    
+            const div = document.createElement('div');
+            div.className = 'book-list';
 
+            display.appendChild(div);
+
+            const title = document.createElement('p');
+            title.textContent=book.title;
+            title.className='class-title';
+
+            div.appendChild(title);
+
+            const author = document.createElement('p');
+            author.textContent=book.author;
+            author.className='class-title';
+
+            div.appendChild(author);
+            
+            const remove = document.createElement('button');
+            remove.textContent='Remove';
+            remove.className ='remove';
+
+            div.appendChild(remove);
+            
+            remove.addEventListener('click', () => {
+                div.style.display = 'none';
+                for(let i=0; i< book.length; i++){
+                    if(book[i].title === title.textContent){
+                        book.splice(i,1);
+                    }
+                }
+            }); 
+        });
+    }
 }
 
-function addBook(){
-    const title = document.querySelector('#title').value;
-    const author = document.querySelector('#author').value;
-    book.title=title;
-    book.author=author;
-    console.log(book);
-}
-
-const form = document.getElementById('form');
-console.log('i am here');
-form.addEventListener('submit', addBook);
-
-*/
