@@ -3,17 +3,14 @@ class Books{
     this.title=title;
     this.author=author;
   }
-}
 
-const book = [];
+  
+  bookSummary() {
+    return `"${this.title}" by ${this.author}`;
+  }
 
-// saves array of objects into local store
-const saveData = (book) => {
-  localStorage.setItem('savedBooks', JSON.stringify(book));
-};
-
-// Remove object from the array, local store and UI
-const removeBook = (target) => {
+  // Remove object from the array, local store and UI
+ static removeBook(target) {
   if (target.className === 'remove') {
     book.forEach((b) => {
       if (b.title === target.parentElement.firstElementChild.innerHTML) {
@@ -27,10 +24,10 @@ const removeBook = (target) => {
 };
 
 // display book object on UI
-const displayBook = (book) => {
+static displayBook(book){
   if (book) {
     const display = document.querySelector('.book-display');
-
+    console.log('i am here too');
     const div = document.createElement('div');
     div.className = 'book-list';
 
@@ -57,19 +54,18 @@ const displayBook = (book) => {
     div.appendChild(remove);
 
     remove.addEventListener('click', (e) => {
-      removeBook(e.target);
+      Books.removeBook(e.target);
       e.preventDefault();
     });
   }
 };
 
 // create book object and add it to array and local store
-const addBook = () => {
-  const bookTitle = document.querySelector('.title').value;
+static addBook(newBook){
+  /*const bookTitle = document.querySelector('.title').value;
   const bookAuthor = document.querySelector('.author').value;
-  const newBook = new Books(bookTitle, bookAuthor);
+  const newBook = new Books(bookTitle, bookAuthor);*/
   
-
   // add book to the array
   book.push(newBook);
 
@@ -77,26 +73,42 @@ const addBook = () => {
   saveData(book);
 
   // display the book on the page
-  displayBook(newBook);
+  Books.displayBook(newBook);
 
+  console.log('i am here');
   // clear fields
-  bookTitle.value = '';
-  bookAuthor.value = '';
+ /* bookTitle.value = '';
+  bookAuthor.value = ''; */
 };
+
+}
+
+const book = [];
+
+// saves array of objects into local store
+const saveData = (book) => {
+  localStorage.setItem('savedBooks', JSON.stringify(book));
+};
+
 
 // fired on page load to show data from the local store
 const showSavedBook = () => {
   // const books = localStorage.getItem('savedBooks');
   const books = JSON.parse(localStorage.getItem('savedBooks'));
   if (books) {
-    books.forEach(displayBook);
+    books.forEach(book in books)
   }
 };
 
+  const bookTitle = document.querySelector('.title').value;
+  const bookAuthor = document.querySelector('.author').value;
+  const newBook = new Books(bookTitle, bookAuthor);
+
 // event listner to the add button
 const addButton = document.querySelector('.btn');
-addButton.addEventListener('click', addBook);
-
+addButton.addEventListener('click', Books.addBook(newBook));
+  bookTitle.value = '';
+  bookAuthor.value = '';
 // this is going to be fired when the page loads
 window.onload = () => {
   showSavedBook();
