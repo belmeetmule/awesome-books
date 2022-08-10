@@ -1,103 +1,60 @@
-class Books{
-  constructor(title, author){
-    this.title=title;
-    this.author=author;
+class Collection {
+  constructor(books) {
+    this.books = [];
+  }
+
+  add(book) {
+    this.books.push(book);
+  }  
+
+  remove(book) {
+    this.books = this.books.filter(i => i !== book);
+  }
+
+  get(index) {
+    return this.books[index];
   }
 }
 
-const book = [];
-
-// saves array of objects into local store
-const saveData = (book) => {
-  localStorage.setItem('savedBooks', JSON.stringify(book));
-};
-
-// Remove object from the array, local store and UI
-const removeBook = (target) => {
-  if (target.className === 'remove') {
-    book.forEach((b) => {
-      if (b.title === target.parentElement.firstElementChild.innerHTML) {
-        const index = book.indexOf(b);
-        book.splice(index, 1);
-        saveData(book);
-        target.parentElement.remove();
-      }
-    });
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
   }
-};
+}
 
-// display book object on UI
-const displayBook = (book) => {
-  if (book) {
-    const display = document.querySelector('.book-display');
+let myCollection = new Collection();
 
+const addbtn = document.querySelector('.btn');
+  addbtn.addEventListener('click', (e) => {
+    const title = document.querySelector('.title').value;
+    const author = document.querySelector('.author').value;
+    if (title === '' || author === '') {
+      alert('Please fill in all fields');
+    } else {
+    let newBook = new Book(title, author);
+    myCollection.add(newBook);
+    const display = document.getElementById('book-list');
     const div = document.createElement('div');
-    div.className = 'book-list';
-
+    div.classList = 'book';
+    div.innerHTML = `<h2>${newBook.title}</h2><p>${newBook.author}</p><button class="remove">Remove</button>`;
     display.appendChild(div);
-
-    const title = document.createElement('p');
-    title.textContent = book.title;
-    title.className = 'class-title';
-
-    div.appendChild(title);
-
-    const author = document.createElement('p');
-    author.textContent = book.author;
-    author.className = 'class-title';
-
-    div.appendChild(author);
-
-    // const bookItem = localStorage.setItem('book', JSON.stringify(book));
-
-    const remove = document.createElement('button');
-    remove.textContent = 'Remove';
-    remove.className = 'remove';
-
-    div.appendChild(remove);
-
-    remove.addEventListener('click', (e) => {
-      removeBook(e.target);
-      e.preventDefault();
+    document.querySelector('.title').value = '';
+    document.querySelector('.author').value = '';
+    e.preventDefault();
+    localStorage.setItem('myCollection', JSON.stringify(myCollection.books));
+    const deletebtn = document.querySelectorAll('.remove');
+    console.log(deletebtn);
+    deletebtn.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const book = e.target.parentElement;      
+        myCollection.remove(book);
+        book.remove();
+        localStorage.removeItem('myCollection');
+        e.preventDefault();    
+      });
     });
-  }
-};
+  }     
+});
 
-// create book object and add it to array and local store
-const addBook = () => {
-  const bookTitle = document.querySelector('.title').value;
-  const bookAuthor = document.querySelector('.author').value;
-  const newBook = new Books(bookTitle, bookAuthor);
-  
 
-  // add book to the array
-  book.push(newBook);
-
-  // save it to local storage
-  saveData(book);
-
-  // display the book on the page
-  displayBook(newBook);
-
-  // clear fields
-  bookTitle.value = '';
-  bookAuthor.value = '';
-};
-
-// fired on page load to show data from the local store
-const showSavedBook = () => {
-  // const books = localStorage.getItem('savedBooks');
-  const books = JSON.parse(localStorage.getItem('savedBooks'));
-  if (books) {
-    books.forEach(displayBook);
-  }
-};
-
-// event listner to the add button
-const addButton = document.querySelector('.btn');
-addButton.addEventListener('click', addBook);
-
-// this is going to be fired when the page loads
-window.onload = () => {
-  showSavedBook();
-};
