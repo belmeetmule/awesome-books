@@ -4,22 +4,24 @@
   font-family: sans-serif;
 }
 
-
 header {
   font-weight: bold;
   text-align: center;
 }
 
-h1{
+h1 {
   margin-bottom: 20px;
 }
+
 .book-input {
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 
-.title, .author, .book-display {
+.title,
+.author,
+.book-display {
   margin: 0 auto;
   width: 60%;
   border: 3px solid #000;

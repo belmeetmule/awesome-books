@@ -27,6 +27,7 @@ class Book {
 }
 
 const mBooks = [];
+const myCollection = new Collection();
 
 function removeBook(newBook) {
   newBook.forEach((b) => {
@@ -40,8 +41,6 @@ function removeBook(newBook) {
     deletebtn.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const book = e.target.parentElement.parentElement;
-
-        console.log(mBooks);
 
         mBooks.forEach((b) => {
           if (`"${b.title}" by ${b.author}` === book.firstElementChild.innerHTML) {
@@ -58,7 +57,6 @@ function removeBook(newBook) {
     });
   });
 }
-const myCollection = new Collection();
 
 const addbtn = document.querySelector('.btn');
 addbtn.addEventListener('click', (e) => {
@@ -97,5 +95,4 @@ addbtn.addEventListener('click', (e) => {
 window.onload = () => {
   const newBook = JSON.parse(localStorage.getItem('myCollection'));
   removeBook(newBook);
-  console.log(`begnning${newBook}`);
 };
