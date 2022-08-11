@@ -46,13 +46,14 @@ header .nav-bar .menu li .menu-item {
 
 h1 {
   margin: 25px auto;
+  margin-top: 80px;
   clear: both;
   text-align: center;
 }
 
 .book-input {
   width: 100%;
-  margin: 80px auto;
+  margin: 50px auto;
   text-align: center;
   height: 40px;
 }
@@ -66,7 +67,7 @@ h1 {
 }
 
 .book-display {
-  margin-top: 80px !important;
+  margin-top: 50px !important;
 }
 
 .title,
