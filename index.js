@@ -39,7 +39,7 @@ const myCollection = new Collection();
 
 list.addEventListener('click', (e) => {
   const h = document.querySelector('h1');
-  h.innerHTML="All awesome books"
+  h.innerHTML = 'All awesome books';
 
   list.style.color = 'blue';
   addList.style.color = 'black';
@@ -53,7 +53,7 @@ list.addEventListener('click', (e) => {
 
 addList.addEventListener('click', (e) => {
   const h = document.querySelector('h1');
-  h.innerHTML="Add a new book"
+  h.innerHTML = 'Add a new book';
 
   addList.style.color = 'blue';
   list.style.color = 'black';
@@ -83,7 +83,7 @@ addList.addEventListener('click', (e) => {
       const newBook = new Book(title, author);
       myCollection.add(newBook);
       const display = document.getElementById('book-list');
-      const div = document.createElement('div');     
+      const div = document.createElement('div');
       div.classList = 'book';
       div.innerHTML = `<div>"${newBook.title}" by ${newBook.author}</div><div><button class="remove">Remove</button></div>`;
       display.appendChild(div);
@@ -117,7 +117,7 @@ contact.addEventListener('click', (e) => {
   dateTime.style.display = 'none';
   contactSection.style.display = 'flex';
   const h = document.querySelector('h1');
-  h.innerHTML="Contact information"
+  h.innerHTML = 'Contact information';
   contactSection.innerHTML = `<p>Do you have any questions or you just want to say "Hello"? <br> You can reach out to us!<p>
                               <br>
                               <ul>
@@ -132,13 +132,12 @@ contact.addEventListener('click', (e) => {
 window.onload = () => {
   const storedBooks = JSON.parse(localStorage.getItem('Collection'));
   if (storedBooks) {
-      const display = document.getElementById('book-list');
-      const con = document.querySelector('body');
-      const h = document.createElement('h1');
-      h.innerHTML = "All awesome books";
-      con.insertBefore(h, display);
-      storedBooks.forEach((book) => {
-      
+    const display = document.getElementById('book-list');
+    const con = document.querySelector('body');
+    const h = document.createElement('h1');
+    h.innerHTML = 'All awesome books';
+    con.insertBefore(h, display);
+    storedBooks.forEach((book) => {
       const div = document.createElement('div');
       div.classList = 'book';
       div.innerHTML = `<div>"${book.title}" by ${book.author}</div><div><button class="remove">Remove</button></div>`;
@@ -153,10 +152,9 @@ window.onload = () => {
       myCollection.remove(book);
       book.remove();
       const store = JSON.parse(localStorage.getItem('Collection'));
-      store.forEach((item,index)=>{
-        console.log(item);
-        if(book.firstElementChild.innerHTML === (`"${item.title}" by ${item.author}`)){
-          store.splice(index,1);
+      store.forEach((item, index) => {
+        if (book.firstElementChild.innerHTML === (`"${item.title}" by ${item.author}`)) {
+          store.splice(index, 1);
           localStorage.setItem('Collection', JSON.stringify(store));
         }
       });
