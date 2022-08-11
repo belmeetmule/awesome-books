@@ -131,12 +131,13 @@ contact.addEventListener('click', (e) => {
 
 window.onload = () => {
   const storedBooks = JSON.parse(localStorage.getItem('Collection'));
+  const display = document.getElementById('book-list');
+  const con = document.querySelector('body');
+  const h = document.createElement('h1');
+  con.insertBefore(h, display);
+  h.innerHTML = 'All awesome books';
   if (storedBooks) {
-    const display = document.getElementById('book-list');
-    const con = document.querySelector('body');
-    const h = document.createElement('h1');
-    h.innerHTML = 'All awesome books';
-    con.insertBefore(h, display);
+    
     storedBooks.forEach((book) => {
       const div = document.createElement('div');
       div.classList = 'book';

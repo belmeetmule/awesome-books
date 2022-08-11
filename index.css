@@ -32,10 +32,16 @@ header .nav-bar .menu {
   display: flex;
   gap: 10px;
   margin-right: 15px;
+  cursor: pointer;
 }
 
 header .nav-bar .menu li .menu-item {
   text-decoration: none;
+  cursor: pointer;
+}
+
+header .nav-bar .menu li .menu-item:hover{
+  color: blue;
 }
 
 .date-time {
