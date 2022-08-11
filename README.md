@@ -35,9 +35,9 @@ To get a local copy up and running follow these simple example steps.
 
 👤 **Author1**
 
-- GitHub: []()
-- Twitter: []()
-- LinkedIn: []()
+- GitHub: [@belmeetmule](https://github.com/belmeetmule)
+- Twitter: [@belmeetmule](https://twitter.com/belmeetmule)
+- LinkedIn: [belmeetmule](https://linkedin.com/in/belmeetmule)
 
 👤 **Author2**
 
