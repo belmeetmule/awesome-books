@@ -137,7 +137,6 @@ window.onload = () => {
   con.insertBefore(h, display);
   h.innerHTML = 'All awesome books';
   if (storedBooks) {
-    
     storedBooks.forEach((book) => {
       const div = document.createElement('div');
       div.classList = 'book';

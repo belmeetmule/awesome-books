@@ -40,7 +40,7 @@ header .nav-bar .menu li .menu-item {
   cursor: pointer;
 }
 
-header .nav-bar .menu li .menu-item:hover{
+header .nav-bar .menu li .menu-item:hover {
   color: blue;
 }
 
