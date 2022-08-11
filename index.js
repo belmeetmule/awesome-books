@@ -90,7 +90,9 @@ addList.addEventListener('click', (e) => {
       document.querySelector('.title').value = '';
       document.querySelector('.author').value = '';
       e.preventDefault();
-      localStorage.setItem('Collection', JSON.stringify(myCollection.books));
+      const st = JSON.parse(localStorage.getItem('Collection'));
+      st.push(newBook);
+      localStorage.setItem('Collection', JSON.stringify(st));
 
       const deletebtn = document.querySelectorAll('.remove');
 
