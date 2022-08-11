@@ -120,7 +120,6 @@ contact.addEventListener('click', (e) => {
 } );
 
 window.onload = () => {
-  dateTime();
   const storedBooks = JSON.parse(localStorage.getItem('Collection'));
   if (storedBooks) {
     storedBooks.forEach((book) => {
