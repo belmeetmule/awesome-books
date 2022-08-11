@@ -1,97 +1,85 @@
-const book = [];
+// eslint-disable-next-line max-classes-per-file
+class Collection {
+  // eslint-disable-next-line no-unused-vars
+  constructor(books) {
+    this.books = [];
+  }
 
-// saves array of objects into local store
-const saveData = (book) => {
-  localStorage.setItem('savedBooks', JSON.stringify(book));
-};
+  add(book) {
+    this.books.push(book);
+  }
 
-// Remove object from the array, local store and UI
-const removeBook = (target) => {
-  if (target.className === 'remove') {
-    book.forEach((b) => {
-      if (b.title === target.parentElement.firstElementChild.innerHTML) {
-        const index = book.indexOf(b);
-        book.splice(index, 1);
-        saveData(book);
-        target.parentElement.remove();
-      }
+  remove(book) {
+    this.books = this.books.filter((i) => i !== book);
+  }
+
+  get(index) {
+    return this.books[index];
+  }
+}
+
+// eslint-disable-next-line max-classes-per-file
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+}
+
+const myCollection = new Collection();
+
+const addbtn = document.querySelector('.btn');
+addbtn.addEventListener('click', (e) => {
+  const title = document.querySelector('.title').value;
+  const author = document.querySelector('.author').value;
+  if (title === '' || author === '') {
+    // eslint-disable-next-line no-alert
+    alert('Please fill in all fields');
+  } else {
+    const newBook = new Book(title, author);
+    myCollection.add(newBook);
+    const display = document.getElementById('book-list');
+    const div = document.createElement('div');
+    div.classList = 'book';
+    div.innerHTML = `<div>"${newBook.title}" by ${newBook.author}</div><div><button class="remove">Remove</button></div>`;
+    display.appendChild(div);
+    document.querySelector('.title').value = '';
+    document.querySelector('.author').value = '';
+    e.preventDefault();
+    localStorage.setItem('Collection', JSON.stringify(myCollection.books));
+
+    const deletebtn = document.querySelectorAll('.remove');
+
+    deletebtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const book = e.target.parentElement.parentElement;
+        myCollection.remove(book);
+        book.remove();
+        e.preventDefault();
+      });
     });
   }
-};
+});
 
-// display book object on UI
-const displayBook = (book) => {
-  if (book) {
-    const display = document.querySelector('.book-display');
+window.onload = () => {
+  const storedBooks = JSON.parse(localStorage.getItem('Collection'));
+  if (storedBooks) {
+    storedBooks.forEach((book) => {
+      const display = document.getElementById('book-list');
+      const div = document.createElement('div');
+      div.classList = 'book';
+      div.innerHTML = `<div>"${book.title}" by ${book.author}</div><div><button class="remove">Remove</button></div>`;
+      display.appendChild(div);
+    });
+  }
+  const deletebtn = document.querySelectorAll('.remove');
 
-    const div = document.createElement('div');
-    div.className = 'book-list';
-
-    display.appendChild(div);
-
-    const title = document.createElement('p');
-    title.textContent = book.title;
-    title.className = 'class-title';
-
-    div.appendChild(title);
-
-    const author = document.createElement('p');
-    author.textContent = book.author;
-    author.className = 'class-title';
-
-    div.appendChild(author);
-
-    // const bookItem = localStorage.setItem('book', JSON.stringify(book));
-
-    const remove = document.createElement('button');
-    remove.textContent = 'Remove';
-    remove.className = 'remove';
-
-    div.appendChild(remove);
-
-    remove.addEventListener('click', (e) => {
-      removeBook(e.target);
+  deletebtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const book = e.target.parentElement.parentElement;
+      myCollection.remove(book);
+      book.remove();
       e.preventDefault();
     });
-  }
-};
-
-// create book object and add it to array and local store
-const addBook = () => {
-  const bookTitle = document.querySelector('.title');
-  const bookAuthor = document.querySelector('.author');
-  const newBook = {};
-  newBook.title = bookTitle.value;
-  newBook.author = bookAuthor.value;
-
-  // add book to the array
-  book.push(newBook);
-
-  // save it to local storage
-  saveData(book);
-
-  // display the book on the page
-  displayBook(newBook);
-
-  // clear fields
-  bookTitle.value = '';
-  bookAuthor.value = '';
-};
-
-// fired on page load to show data from the local store
-const showSavedBook = () => {
-  // const books = localStorage.getItem('savedBooks');
-  const books = JSON.parse(localStorage.getItem('savedBooks'));
-  if (books) {
-    books.forEach(displayBook);
-  }
-};
-
-// event listner to the add button
-const addButton = document.querySelector('.btn');
-addButton.addEventListener('click', addBook);
-
-// this is going to be fired when the page loads
-window.onload = () => {
-  showSavedBook();
+  });
 };
