@@ -61,7 +61,12 @@ addbtn.addEventListener('click', (e) => {
   }
 });
 
+function dateTime(){
+  const dateTime = document.querySelector('.date-time');
+  dateTime.innerHTML = new Date();
+}
 window.onload = () => {
+  dateTime();
   const storedBooks = JSON.parse(localStorage.getItem('Collection'));
   if (storedBooks) {
     storedBooks.forEach((book) => {
