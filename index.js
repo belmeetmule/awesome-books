@@ -90,13 +90,13 @@ addList.addEventListener('click', (e) => {
       document.querySelector('.title').value = '';
       document.querySelector('.author').value = '';
       e.preventDefault();
-      let savedThing=[];
-      savedThing.push(newBook)
+      const savedThing = [];
+      savedThing.push(newBook);
       const st = JSON.parse(localStorage.getItem('Collection'));
-      if(st){
+      if (st) {
         st.push(newBook);
         localStorage.setItem('Collection', JSON.stringify(st));
-      }else{
+      } else {
         localStorage.setItem('Collection', JSON.stringify(savedThing));
       }
 
